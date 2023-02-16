@@ -4,7 +4,7 @@ from tkinter import filedialog
 import random
 
 root = Tk()
-root.geometry("600x300")
+root.geometry("600x150")
 
 mixer.init()
 
@@ -59,7 +59,7 @@ def quit():
     # Close the window
     root.destroy()
 
-Label(root, text="Welcome to music player", font="lucidia 30 bold").pack()
+Label(root, text="Advanced Mp3 Player", font="Poppins 30 bold").pack()
 song_label = Label(root, text="", font="lucidia 12 bold")
 song_label.pack()
 
