@@ -16,9 +16,11 @@ def pause():
 def play():
     # If the queue is not empty, play the first song in the queue
     if queue:
-        song_path = queue.pop(0)
+        song_path = queue[0]
         mixer.music.load(song_path)
         mixer.music.play()
+        # Remove the first song from the queue
+        del queue[0]
     else:
         mixer.music.play()
 
@@ -28,6 +30,13 @@ def resume():
 def select_song():
     song_path = filedialog.askopenfilename()
     queue.append(song_path)
+
+def skip():
+    # Stop any music that's currently playing
+    mixer.music.stop()
+    # If the queue is not empty, play the first song in the queue
+    if queue:
+        play()
 
 def quit():
     # Stop any music that's currently playing
@@ -42,6 +51,8 @@ Button(text="Add to Queue", command=select_song).place(x=250, y=100)
 Button(text="Play", command=play).place(x=310, y=100)
 Button(text="Pause", command=pause).place(x=380, y=100)
 Button(text="Resume", command=resume).place(x=450, y=100)
-Button(text="Quit", command=quit).place(x=520, y=100)
+Button(text="Skip", command=skip).place(x=520, y=100)
+Button(text="Quit", command=quit).place(x=570, y=100)
 
 root.mainloop()
+
