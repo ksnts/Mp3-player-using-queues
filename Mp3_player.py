@@ -10,20 +10,24 @@ mixer.init()
 
 # Create an empty list to hold the songs in the queue
 queue = []
+song_count = 0
 
 def pause():
     global queue
     mixer.music.pause()
 
 def play():
-    global queue
+    global queue, song_count
     # If the queue is not empty, play the first song in the queue
     if queue:
         song_path = queue[0]
         mixer.music.load(song_path)
         mixer.music.play()
+        song_count += 1
         # Remove the first song from the queue
         del queue[0]
+        # Update the label text
+        song_label.config(text=f"Playing: {song_path} (song {song_count})")
     else:
         mixer.music.play()
 
@@ -56,6 +60,8 @@ def quit():
     root.destroy()
 
 Label(root, text="Welcome to music player", font="lucidia 30 bold").pack()
+song_label = Label(root, text="", font="lucidia 12 bold")
+song_label.pack()
 
 Button(text="Select Song", command=select_song).place(x=150, y=100)
 Button(text="Add to Queue", command=select_song).place(x=250, y=100)
